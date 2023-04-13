@@ -1,0 +1,25 @@
+version: '3'
+services:
+  pg_db:
+    image: postgres:14.7
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=admin
+  clickhouse_db:
+    image: bitnami/clickhouse:latest
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    environment:
+      - CLICKHOUSE_USER=user
+      - CLICKHOUSE_PASSWORD=admin
+      - CLICKHOUSE_DB=lab_db
+
+volumes:
+  db-data:
+  clickhouse-data:
